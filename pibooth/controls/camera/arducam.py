@@ -86,7 +86,7 @@ class ArduCamera(BaseCamera):
         LOGGER.info("Arducam - preview...")
         self._window = window
         rect = window.get_rect()
-        self._cam.start_preview(fullscreen = False, window = (0, 0, rect.width, rect.height))                                
+        self._cam.start_preview(fullscreen = True, window = (0, 0, rect.width, rect.height))                                
         LOGGER.info("Arducam - Reset the focus...")
         self._cam.reset_control(v4l2.V4L2_CID_FOCUS_ABSOLUTE)
         LOGGER.info("Arducam - Enable Auto Exposure...")
