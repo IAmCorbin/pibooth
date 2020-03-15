@@ -2,6 +2,7 @@
 
 from pibooth.utils import LOGGER, pkill
 from pibooth.controls.camera.rpi import RpiCamera, rpi_camera_connected
+from pibooth.controls.camera.arducam import ArduCamera, ardu_camera_connected
 from pibooth.controls.camera.gphoto import GpCamera, gp_camera_connected
 from pibooth.controls.camera.gphoto_omx import GpOmxCamera, gpomx_camera_connected
 from pibooth.controls.camera.opencv import CvCamera, cv_camera_connected
@@ -15,6 +16,7 @@ def get_camera(iso, resolution, rotation, flip, delete_internal_memory):
     The priority order is chosen in order to have best rendering during preview
     and to take captures.
     """
+    LOGGER.info("get_camera")
     if gp_camera_connected() and rpi_camera_connected():
         LOGGER.info("Configuring hybrid camera (Picamera + gPhoto2) ...")
         cam_class = HybridCamera
@@ -33,6 +35,9 @@ def get_camera(iso, resolution, rotation, flip, delete_internal_memory):
     elif cv_camera_connected():
         LOGGER.info("Configuring OpenCV camera ...")
         cam_class = CvCamera
+    elif ardu_camera_connected():
+        LOGGER.info("Configuring Arducam camera ...")
+        cam_class = ArduCamera
     else:
         raise EnvironmentError("Neither Raspberry Pi nor GPhoto2 nor OpenCV camera detected")
 
