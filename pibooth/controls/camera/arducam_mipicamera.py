@@ -1,6 +1,7 @@
 '''
 This script is a wrapper for the libarducam_mipicamera.so dynamic library. 
 To use this script you need to pre-install libarducam_mipicamera.so
+https://github.com/ArduCAM/MIPI_Camera/tree/master/RPI
 '''
 from ctypes import *
 import numpy as np
